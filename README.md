@@ -1,5 +1,15 @@
 
-# MojoZork
+# Z8kzork
+This is a port of Ryan C. Gordon's mojozork z-machine to run on smbaker's Z-8000 CP/M-8000 retrocomputer. It compiles natively using the zcc compiler in the CP/M-8000 ver 1.1 distribution. This compiler has many quirks and limitations and made the originally clean code downright ugly by the time I was done with it. This was a quick and dirty hack to make it work, nothing more.
+
+This resulting z-machine will run as split-I/D mode with up to 64KB of code and 64KB of data. Zork1 is about 90KB in size, so a paging scheme is utilized to load the story on demand in 512 byte blocks, and then reap less-used blocks and replace them.
+
+The Makefile will also compile it on Linux, as it's easier to test on a modern Linux box than on a 40-year old obsolete CPU running at 8 MHz.
+
+-Scott
+
+Original documentation for Mojozork follows...
+
 
 ```
 >read leaflet
@@ -30,10 +40,6 @@ for free, so I've included Zork I's data files with this project. If you want
 to see Zork I run through from start to finish, you can run a pre-written
 script to complete the entire game from the command line, like this:
 
-```
-./mojozork ./zork1.dat ./zork1-script.txt
-```
-
 If you want to write your own Z-Machine, there is an "official" specification
 on how to implement it, written by people that spent significant time
 reverse engineering the originals from Infocom, and extending the ecosystem
@@ -42,28 +48,6 @@ with new tools. You can find that specification
 
 As usual, Wikipedia offers a wonderful rabbit hole to fall down, too, in
 their [Z-machine article](https://en.wikipedia.org/wiki/Z-machine).
-
-# MultiZork
-
-On top of the MojoZork code, there is a telnet server called `multizorkd` that
-lets several people connect _to the same game_ and play it as a multiplayer
-experience. Each player has their own inventory and can move independent of
-others. This probably only works on Linux/Unix systems, but the single-player
-mojozork program should work on just about anything.
-
-You can play MultiZork right now by pointing a telnet client at
-multizork.icculus.org (or running `nc multizork.icculus.org 23`).
-
-[A post on my Patreon](https://www.patreon.com/posts/54997062) explains the
-motivations and technical details of multizork. If you like this, please
-consider throwing in a dollar so I can keep doing wild things like this!
-
-# libretro core
-
-Ever want to play Z-Machine games under RetroArch? Now you can. The libretro
-core handles all the tapdancing to make text-based games run in a graphical
-window, and can be played with a keyboard (in RetroArch focus mode), or with
-a mouse or game controller on an included virtual keyboard.
 
 
 Enjoy!

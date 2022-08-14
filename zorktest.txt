@@ -1,0 +1,237 @@
+look
+open mailbox
+take leaflet
+read leaflet
+open door
+look
+south
+east
+open window
+enter window
+take water
+take bottle
+open bottle
+drink water
+take sack
+open sack
+drop lunch
+west
+take lantern
+take sword
+open case
+put sack in case
+close case
+open door
+move rug
+open trap door
+turn on lantern
+down
+n
+s
+s
+e
+take painting
+n
+drop leaflet
+drop sword
+drop bottle
+up
+up
+take rope
+take knife
+down
+w
+drop knife
+open case
+put painting in case
+close case
+score
+open trap door
+d
+s
+e
+n
+take sword
+s
+w
+n
+n
+hit troll with sword
+hit troll with sword
+drop sword
+e
+e
+se
+e
+tie rope to railing
+d
+s
+e
+take coffin
+take coffin
+take coffin
+w
+s
+pray
+turn off lamp
+s
+n
+e
+d
+d
+n
+drop coffin
+open coffin
+take sceptre
+inventory
+wave sceptre
+take gold
+take coffin
+go southwest
+u
+u
+nw
+w
+enter house
+w
+take garlic
+open case
+put gold in case
+put sceptre in case
+put coffin in case
+score
+look
+open trap door
+turn on lamp
+d
+n
+e
+n
+ne
+e
+n
+take matches
+n
+take wrench
+take screwdriver
+push yellow button
+s
+s
+turn bolt with wrench
+drop wrench
+s
+d
+se
+d
+d
+w
+se
+e
+d
+take torch
+turn off lamp
+s
+take bell
+s
+take candles
+take book
+d
+d
+ring bell
+take candles
+light match
+light candles with match
+read book
+drop book
+s
+take skull
+n
+u
+n
+rub mirror
+n
+w
+n
+w
+inventory
+put out candles
+n
+e
+put torch in basket
+put screwdriver in basket
+turn on lamp
+n
+d
+e
+ne
+se
+sw
+d
+d
+s
+take coal
+n
+u
+u
+n
+e
+s
+n
+u
+s
+put coal in basket
+lower basket
+n
+d
+e
+ne
+se
+sw
+d
+d
+w
+drop all
+w
+take coal
+take screwdriver
+take torch
+s
+open lid
+put coal in machine
+close lid
+turn switch with screwdriver
+drop screwdriver
+open lid
+take diamond
+n
+put torch in basket
+put diamond in basket
+e
+take lamp
+take garlic
+e
+u
+u
+n
+e
+s
+n
+take bracelet
+u
+s
+raise basket
+look in basket
+take diamond
+take torch
+turn off lamp
+w
+take jade
+s
+e
+s
+d
+u
+inventory
+put jade in case
+put diamond in case
+score
