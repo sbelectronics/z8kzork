@@ -17,9 +17,9 @@ up:
 	cp host.c holding/
 	cp host.h holding/
 	python ~/projects/pi/z8000/cpm8kdisks/addeof.py holding/*.h holding/*.c
-	cpmrm -f cpm8k ~/projects/pi/z8000/super/sup.img  z8kzork.c host.h host.c catseye.z3 dejavu.z3 moonglow.z3 zork1.dat || true
+	cpmrm -f cpm8k ~/projects/pi/z8000/super/sup.img  z8kzork.c host.h host.c catseye.z3 dejavu.z3 moonglow.z3 zork1.dat leather.dat || true
 	cpmcp -f cpm8k ~/projects/pi/z8000/super/sup.img holding/* 0:
-	cpmcp -f cpm8k ~/projects/pi/z8000/super/sup.img games/catseye.z3 games/dejavu.z3 games/moonglow.z3  zork1.dat 0:
+	cpmcp -f cpm8k ~/projects/pi/z8000/super/sup.img games/catseye.z3 games/dejavu.z3 games/moonglow.z3 zork1.dat games/leather.dat 0:
 
 .PHONY: down
 down:
