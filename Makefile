@@ -1,3 +1,8 @@
+linux: z8kzork
+olivetti: build/olizork.cmd build/olizorkn.cmd
+cpm8000:
+	echo "you have to run zcc on the actual computer..."
+
 z8kzork: z8kzork.c host.c host.h
 	gcc -DLINUX -g -c z8kzork.c -o z8kzork.o -Wno-pointer-to-int-cast -Wno-format
 	gcc -DLINUX -g -c host.c -o host.o
@@ -8,7 +13,7 @@ mojozork: mojozork.c
 	gcc -o mojozork mojozork.o
 
 clean:
-	rm z8kzork *.o
+	rm -f z8kzork *.o build/*.cmd build/*.map
 
 up:
 	rm -rf holding
@@ -38,9 +43,9 @@ listimg:
 	cpmls -f cpm8k -D ~/projects/pi/z8000/super/sup.img
 
 # optimized version -- it's about twice as fast as the nonoptimized version.
-olizork.cmd:
-	z8k-pcos-gcc z8kzork.c olihost.c -o olizork.cmd -DOLIVETTI -Wl,-multi,-map,olizork.map -O2
+build/olizork.cmd:
+	z8k-pcos-gcc z8kzork.c olihost.c -o build/olizork.cmd -DOLIVETTI -Wl,-multi,-map,build/olizork.map -O2
 
 # non-optimized version
-olizorkn.cmd:
-	z8k-pcos-gcc z8kzork.c olihost.c -o olizorkn.cmd -DOLIVETTI -Wl,-multi,-map,olizorkn.map
+build/olizorkn.cmd:
+	z8k-pcos-gcc z8kzork.c olihost.c -o build/olizorkn.cmd -DOLIVETTI -Wl,-multi,-map,build/olizorkn.map
