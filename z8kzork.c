@@ -70,7 +70,15 @@
 #define NUM_SLOTS 256
 #define BLKSIZE 512
 #define BLKSLACK 4
+
+#ifdef OLIVETTI
+/* Keep an eye on the map file. You can set this big enough so that it's larger
+ * than a segment. I don't know what happens then...
+ */
+#define HEAP_SIZE (24576 + 1024 + 150)
+#else
 #define HEAP_SIZE (16384 + 1024 + 150)
+#endif
 
 #define MAX_STORYBASE 24800
 
@@ -218,7 +226,7 @@ uint32 offset;
     dbg(" fetching blkOffset %X", blkoffset);
     dbg(" for slot %d\n", slot);
 
-    if ((heapPtr+BLKSIZE + BLKSLACK) > heapEnd) {
+    if (heapPtr > (heapEnd-BLKSIZE-BLKSLACK)) {
         /* don't fear the reaper */
         dbg("don't fear the reaper: heapPtr=%p, heapEnd=%p\n", heapPtr, heapEnd);
         while (1) {
@@ -1557,6 +1565,8 @@ static voidret op_read(voidarg)
     const uint8 *parse;
     const uint8 parselen;
     uint8 *input;
+
+    //printf("XX heapPtr=%p, heapEnd=%p\n", heapPtr, heapEnd);
 
     dbg("read from input stream: text-buffer=%x parse-buffer=%x\n", (unsigned int) GState->operands[0], (unsigned int) GState->operands[1]);
 
