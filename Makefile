@@ -36,3 +36,7 @@ compare:
 
 listimg:
 	cpmls -f cpm8k -D ~/projects/pi/z8000/super/sup.img
+
+olizork.cmd:
+	z8k-pcos-gcc z8kzork.c olihost.c -o olizork.cmd -DOLIVETTI -Wl,-multi
+

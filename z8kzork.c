@@ -220,6 +220,7 @@ uint32 offset;
 
     if ((heapPtr+BLKSIZE + BLKSLACK) > heapEnd) {
         /* don't fear the reaper */
+        dbg("don't fear the reaper: heapPtr=%p, heapEnd=%p\n", heapPtr, heapEnd);
         while (1) {
             reaper++;
             if (reaper>=NUM_SLOTS) {
@@ -245,8 +246,12 @@ uint32 offset;
 
     SlotHit[slot]=1;
 
+    dbg("Seeking\n");
+
     seekres = FSEEK(GState->storyFile, blkoffset, SEEK_SET);
     ASSERT(seekres==0, "pcptro: failed to seek\n");
+
+    dbg("Reading\n");
     
     bread = FREAD(Slots[slot], 1, BLKSIZE+BLKSLACK, GState->storyFile);
     ASSERT(bread>0, "pcptro: failed to read\n");
@@ -1685,8 +1690,11 @@ static voidret op_verify(voidarg)
     voidreturn;    
 } /* op_verify */
 
-
+#ifdef OLIVETTI
+static voidret loadStory(const char *fname);
+#else
 static voidret loadStory(fname); /* const char *fname); */
+#endif
 
 static voidret op_restart(voidarg)
 {
@@ -1936,8 +1944,8 @@ static voidret inititialOpcodeTableSetup(voidarg)
 {
     Opcode *opcodes;
 
-    MEMSET(GState->opcodes, '\0', sizeof (GState->opcodes));
-    MEMSET(GState->extended_opcodes, '\0', sizeof (GState->extended_opcodes));
+    MEMSET((char*) GState->opcodes, '\0', sizeof (GState->opcodes));
+    MEMSET((char*) GState->extended_opcodes, '\0', sizeof (GState->extended_opcodes));
 
     opcodes = GState->opcodes;
 
@@ -2049,6 +2057,8 @@ uint8 *story;
     const uint8 *ptr;
     int seekres, bread;
 
+    dbg("initStory0: GState=%p, GState->stack=%p, GState->operands=%p, sstack=%d, sop=%d\n", GState, GState->stack, GState->operands, sizeof(GState->stack), sizeof(GState->operands));
+
     ASSERT(strlen(fname)<255, "filename is too long");
     GState->story_filename = fname;
 
@@ -2056,13 +2066,13 @@ uint8 *story;
     PCSET(0);
     GState->logical_pc = 0;
     GState->quit = 0;
-    MEMSET(GState->stack, '\0', sizeof (GState->stack));
-    MEMSET(GState->operands, '\0', sizeof (GState->operands));
+    MEMSET((char*) GState->stack, '\0', sizeof (GState->stack));
+    MEMSET((char*) GState->operands, '\0', sizeof (GState->operands));
     GState->operand_count = 0;
     GState->sp = NULL;  /* stack pointer */
     GState->bp = 0;  /* base pointer */
 
-    MEMSET(&GState->header, '\0', sizeof (GState->header));
+    MEMSET((char*) &GState->header, '\0', sizeof (GState->header));
     ptr = GState->storyBase;
 
     /*GState->story[1] &= ~(1<<3);   this is the infamous "Tandy Bit". Turn it off. */
@@ -2123,7 +2133,11 @@ uint8 *story;
     ASSERT(bread==GState->storyBaseLen+BLKSLACK, "initStory: failed to read storyBase\n");
     dbg("Read %d for storyBase\n", bread);
 
+#ifdef OLIVETTI
+    dbg("storyBase=%p Slots=%x GState=%p\n", GState->storyBase, (uint16) Slots, GState);
+#else
     dbg("storyBase=%x Slots=%x GState=%x\n", (uint16) GState->storyBase, (uint16) Slots, (uint16) GState);
+#endif
 
     initAlphabetTable();
     initOpcodeTable();
@@ -2196,7 +2210,11 @@ char **argv;
     uint8 i;
 
     printf("z8kzork based on mojozork by Ryan C. Gordon.\n");
+#ifdef OLIVETTI
+    printf("modifed for Olivetti PCOS by Scott M Baker, www.smbaker.com\n\n");
+#else
     printf("modifed for cp/m-8000 by Scott M Baker, www.smbaker.com\n\n");
+#endif
 
     Debug = 0;
     for (i=1; i<argc; i++) {
@@ -2204,6 +2222,11 @@ char **argv;
             if ((argv[i][1] == 'd') || (argv[i][1]=='D')) {
                 Debug = 1;
             }
+        } else if ((argv[i][0]=='D') && (argv[i][1]=='B') && (argv[i][2]=='G')) {
+            /* I think the Olivetti may mess with args that start with -, so let's also
+             * let the user type "DBG" for an arg.
+             */
+            Debug = 1;
         } else {
             fname = argv[i];
         }
