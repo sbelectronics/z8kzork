@@ -6,6 +6,11 @@ This resulting z-machine will run as split-I/D mode with up to 64KB of code and 
 
 The Makefile will also compile it on Linux, as it's easier to test on a modern Linux box than on a 40-year old obsolete CPU running at 8 MHz.
 
+10/22/2023 - now also builds for Olivetti, using "make olivetti". This will build build/olizork.cmd and build/olizorkn.cmd. The former
+is optimized and the latter is nonoptimized (for comparison). Use the optimized one.
+
+You'll need to supply your own zork1.dat file.
+
 -Scott
 
 Original documentation for Mojozork follows...
