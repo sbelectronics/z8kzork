@@ -12,6 +12,14 @@
 #define HAVE_FILES
 #endif
 
+#ifdef OLIVETTI
+/* olivetti needs this, otherwise errors while optimizing */
+#define VOLATILE volatile
+#else
+/* assumption is zcc doesn't like this */
+#define VOLATILE
+#endif
+
 /* zcc hates the static keyword */
 #define static /**/
 

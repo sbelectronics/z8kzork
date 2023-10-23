@@ -37,6 +37,10 @@ compare:
 listimg:
 	cpmls -f cpm8k -D ~/projects/pi/z8000/super/sup.img
 
+# optimized version -- it's about twice as fast as the nonoptimized version.
 olizork.cmd:
-	z8k-pcos-gcc z8kzork.c olihost.c -o olizork.cmd -DOLIVETTI -Wl,-multi,-map,olizork.map
+	z8k-pcos-gcc z8kzork.c olihost.c -o olizork.cmd -DOLIVETTI -Wl,-multi,-map,olizork.map -O2
 
+# non-optimized version
+olizorkn.cmd:
+	z8k-pcos-gcc z8kzork.c olihost.c -o olizorkn.cmd -DOLIVETTI -Wl,-multi,-map,olizorkn.map

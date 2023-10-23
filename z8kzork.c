@@ -365,7 +365,7 @@ const int writing;
 
 static voidret op_call(voidarg)
 {
-    uint8 args = GState->operand_count;
+    VOLATILE uint8 args = GState->operand_count;
     const uint16 *operands = GState->operands;
     const uint8 storeid = PCBI;
     /* no idea if args==0 should be the same as calling addr 0... */
@@ -380,7 +380,7 @@ static voidret op_call(voidarg)
         const uint32 pcoffset;
         const uint16 *src;
         uint8 *dst;
-        sint8 i;
+        VOLATILE sint8 i;
         uint32 routine = unpackAddress((uint32) operands[0]);
 
         dbg("routine is at %X\n", routine);
@@ -1418,7 +1418,7 @@ static voidret tokenizeUserInput(voidarg)
     const uint8 entrylen = *(dict++);
     const uint8 *strstart;
     const uint8 *ptr;
-    uint8 numtoks = 0;    
+    VOLATILE uint8 numtoks = 0;    
     const uint16 numentries = READUI16(dict);
 
     input++;  /* skip over inputlen byte; we checked this and capped input elsewhere. */
